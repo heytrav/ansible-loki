@@ -1,0 +1,28 @@
+---
+- name: Fetch checksum for loki package
+  uri:
+    url: "{{ loki_checksum_url }}"
+    return_content: yes
+  register: checksum_content
+
+- name: Download loki binary
+  get_url:
+    url: "{{ loki_url }}"
+    checksum: "sha256:{{ loki_checksum }}"
+    dest: "{{ loki_archive }}"
+
+- name: Unzip package
+  command: gunzip -k {{ loki_archive }}
+  args:
+    chdir: /usr/local/bin
+    creates: "{{ loki_executable }}"
+
+- name: Make loki executable
+  file:
+    path: "{{ loki_executable }}"
+    state: file
+    owner: root
+    group: root
+    mode: 0755
+
+

@@ -1,0 +1,3 @@
+---
+loki_url: "https://github.com/grafana/loki/releases/download/{{ version }}/{{ asset }}.gz"
+loki_checksum_url: "https://github.com/grafana/loki/releases/download/{{ version }}/SHA256SUMS"

@@ -1,0 +1,8 @@
+---
+version: v1.0.0
+asset: loki-linux-amd64
+
+loki_checksum: "{{ checksum_content.content | regex_findall('^(?m)([^\\s]+)\\s+' + asset + '.*$') | first }}"
+loki_archive: "/usr/local/bin/{{ loki_url | basename }}"
+loki_executable: "/usr/local/bin/{{ asset }}"
+
